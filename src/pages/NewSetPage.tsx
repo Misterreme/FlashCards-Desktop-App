@@ -54,8 +54,7 @@ function NewSetPage() {
 
                 window.CRUD.saveJSON(newSet);
 
-                setIsCreatingSet(false);
-                setIsCreatingCard(false);
+                resetAllStates();
                 setCards([]);
                 setError("");
 
@@ -75,7 +74,7 @@ function NewSetPage() {
 
                 window.CRUD.editJSON(newSet);
 
-                setIsEditingSet(false);
+                resetAllStates();
                 setError("");
 
             } else {
@@ -90,7 +89,7 @@ function NewSetPage() {
                 ...prev,
                 { id: crypto.randomUUID(), title: cardTitle, text: cardText }
             ])
-            setIsCreatingCard(false);
+            resetCardStates();
             
         } else {
             setCardError("La tarjeta no puede estar vacia");
@@ -98,8 +97,7 @@ function NewSetPage() {
     }
 
     function handleNavigate(url: string) {
-        setIsCreatingSet(false);
-        setIsEditingSet(false);
+        resetAllStates();
         setError("");
         navigate(url);
     }
@@ -134,12 +132,29 @@ function NewSetPage() {
                 )
             );
     
-            setIsEditingCard(false);
-            setEditingCardId(null);
+            resetCardStates();
 
         } else {
             setCardError("La tarjeta no puede estar vacia");
         }
+    }
+
+    function resetCardStates() {
+        setIsCreatingCard(false);
+        setIsEditingCard(false);
+        setCardTitle("");
+        setCardText("");
+        setEditingCardId(null);
+    }
+
+    function resetAllStates() {
+        setIsCreatingCard(false);
+        setIsEditingCard(false);
+        setCardTitle("");
+        setCardText("");
+        setEditingCardId(null);
+        setIsCreatingSet(false);
+        setIsEditingSet(false);
     }
 
     useEffect(() => {
@@ -297,13 +312,7 @@ function NewSetPage() {
                                     <button 
                                         className="text-sm font-bold justify-center gap-3 bg-red-400 py-3 px-4 rounded-xl text-background-light cursor-pointer hover:scale-105 active:scale-100 active:opacity-70 transition-all"
                                         type="button"
-                                        onClick={ () => { 
-                                            setIsCreatingCard(false);
-                                            setIsEditingCard(false);
-                                            setCardTitle("");
-                                            setCardText("");
-                                            setEditingCardId(null)
-                                        } }
+                                        onClick={ () => resetCardStates() }
                                         >
                                             Cancelar
                                     </button>
