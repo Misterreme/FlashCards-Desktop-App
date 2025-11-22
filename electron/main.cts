@@ -25,8 +25,8 @@ const createWindow = () => {
   })
 
   // win?.setMenu(null);
-  // win?.loadFile(path.join(__dirname, "..", "dist-react", "index.html"));
-  win?.loadURL('http://localhost:5173');
+  win?.loadFile(path.join(__dirname, "..", "dist-react", "index.html"));
+  // win?.loadURL('http://localhost:5173');
 
   win?.on("closed", () => {
     win = null;

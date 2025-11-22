@@ -60,8 +60,8 @@ var createWindow = function () {
         },
     });
     // win?.setMenu(null);
-    // win?.loadFile(path.join(__dirname, "..", "dist-react", "index.html"));
-    win === null || win === void 0 ? void 0 : win.loadURL('http://localhost:5173');
+    win === null || win === void 0 ? void 0 : win.loadFile(path.join(__dirname, "..", "dist-react", "index.html"));
+    // win?.loadURL('http://localhost:5173');
     win === null || win === void 0 ? void 0 : win.on("closed", function () {
         win = null;
     });
