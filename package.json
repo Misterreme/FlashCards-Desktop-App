@@ -1,0 +1,64 @@
+{
+  "name": "flashcards-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./source/main.cjs",
+  "author": "Flash Card Studios",
+  "description": "A easy to use FlashCards App",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "electron:build": "electron-builder",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "electron:tsc": "tsc electron/main.cts --outDir source && tsc electron/preload.cts --outDir source && electron ."
+  },
+  "build": {
+    "appId": "com.flashcards.app",
+    "productName": "FlashCards",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist-react/**/*",
+      "source/main.cjs",
+      "source/preload.cjs",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/icons/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.17",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.9.5",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "electron": "^39.2.0",
+    "electron-builder": "^26.0.12",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.3",
+    "vite": "^7.2.2"
+  }
+}
