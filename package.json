@@ -1,11 +1,16 @@
 {
-  "name": "flashcards-app",
-  "private": true,
-  "version": "1.0.1",
+  "name": "flashcardsapp",
+  "version": "1.1.2",
+  "productName": "FlashCards App",
   "type": "module",
   "main": "./source/main.cjs",
   "author": "Flash Card Studios",
-  "description": "A easy to use FlashCards App",
+  "description": "An easy to use FlashCards App",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Misterreme/FlashCards-Desktop-App"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -16,7 +21,7 @@
   },
   "build": {
     "appId": "com.flashcards.app",
-    "productName": "FlashCards",
+    "productName": "FlashCards App",
     "directories": {
       "output": "release",
       "buildResources": "build"

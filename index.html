@@ -25,6 +25,35 @@
     <link rel="stylesheet" href="./src/css/global.css">
   </head>
   <body>
+    <div id="loader" class="bg-background-light dark:bg-dark-background dark:text-dark-text-primary flex flex-col w-full h-full items-center justify-center text-xl">
+        <div class="w-full h-[5vh] min-h-[5vh] max-h-[5vh] z-999 fixed top-0 bg-gray-300">
+            <div class="w-full h-full flex items-center">
+                <div class="w-full h-full flex items-center gap-3 justify-between pl-5">
+                    <div class="flex gap-3 items-center">
+                        <img src="public/icons/favicon.ico" class="w-8 h-8 grayscale" alt="App Icon" />
+                        <h2 class="font-semibold text-xl text-text-muted">FlashCards</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full flex flex-col items-center justify-center gap-15">
+          <div class="w-[215px] p-5 animate-bg"></div>
+          <div class="w-full flex flex-col items-center justify-center gap-2">
+            <div class="w-[470px] p-5 animate-bg"></div>
+            <div class="w-[440px] p-5 animate-bg"></div>
+            <div class="w-60 p-5 animate-bg"></div>
+          </div>
+          <div class="w-full flex flex-col items-center justify-center gap-10">
+            <div class="w-[190px] p-5 animate-bg"></div>
+            <div class="w-[210px] p-5 animate-bg"></div>
+          </div>
+          <div class="w-full px-5 md:px-10 lg:px-15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center place-content-center gap-5">
+            <div class="w-full h-[200px] animate-bg"></div>
+            <div class="w-full h-[200px] animate-bg"></div>
+            <div class="w-full h-[200px] animate-bg"></div>
+          </div>
+        </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

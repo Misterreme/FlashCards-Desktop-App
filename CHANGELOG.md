@@ -4,19 +4,31 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 Este formato sigue el estándar Semantic Versioning (SemVer)
 y la estructura de Keep a Changelog.
 
----
-
 ## [Unreleased]
 ### Added
-- Modal de advertencia al intentar eliminar una card, para evitar eliminaciones accidentales.
-- Implementación de Dark Mode en toda la aplicación.
 - Nueva pantalla de finalización cuando el usuario termina de estudiar un set.
 
 ### Changed
 - *(Sin cambios definidos por ahora.)*
 
 ### Fixed
-- *(Sin correcciones definidas por ahora.)*
+- *(Sin bugs corregidos por ahora.)*
+
+---
+
+## [1.1.2]
+### Added
+- Modal de advertencia al intentar eliminar una card, para evitar eliminaciones accidentales.
+- Implementación de Dark Mode en toda la aplicación.
+- Loader al iniciar o recargar la aplicacion.
+
+### Changed
+- Diseño del scrolll-bar adaptado al diseño de la aplicación.
+
+### Fixed
+- Porcentaje de estudio del set parseado.
+- Pantallazo blanco al abrir o recargar la aplicación.
+- Pantalla de estudio corregida en pantallas más pequeñas.
 
 ---
 
@@ -36,4 +48,3 @@ y la estructura de Keep a Changelog.
 - Sistema de sets y cards.
 - Pantalla de estudio.
 - Estructura inicial de navegación y contexto global.
-

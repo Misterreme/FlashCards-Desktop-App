@@ -7,10 +7,12 @@ import { useEffect, useState } from "react";
 import { FaRegSave } from "react-icons/fa";
 import CardPreview from "../components/CardPreview";
 import ErrorMessage from "../components/notifications/ErrorMessage";
+import DeleteMessage from "../components/notifications/DeleteMessage";
 
 function NewSetPage() {
 
-    const { isCreatingSet, 
+    const { 
+            isCreatingSet, 
             setIsCreatingSet, 
             isCreatingCard, 
             setIsCreatingCard, 
@@ -24,7 +26,8 @@ function NewSetPage() {
             isEditingCard,
             setIsEditingCard,
             cardError,
-            setCardError
+            setCardError,
+            handleDeleteCard
 
         } = useAppContext();
 
@@ -100,13 +103,6 @@ function NewSetPage() {
         resetAllStates();
         setError("");
         navigate(url);
-    }
-
-    function deleteCard(id: string) {
-        setCards(prev => {
-            const filteredCards = prev.filter(card => card.id !== id);
-            return filteredCards;
-        })
     }
 
     function editCard(id: string) {
@@ -189,14 +185,16 @@ function NewSetPage() {
     }, [isCreatingCard])
 
     return (
-        <section className="w-full bg-background-light pt-[10dvh] pb-10 relative">
+        <section className="w-full bg-background-light dark:bg-dark-background pt-[10dvh] pb-10 relative">
             <ErrorMessage text={error} />
             <ErrorMessage text={cardError} />
+            <DeleteMessage text="¿Estas seguro que quieres eliminar esta tarjeta? Esta acción no pude deshacerse." />
+            
             <div className="w-full h-full flex flex-col px-5 sm:px-10 md:px-15 lg:px-60 gap-10">
                 <header className="flex items-center justify-between">
                     <div className="flex items-center text-center">
                         <div onClick={ () => handleNavigate("/") } 
-                            className="flex gap-2 text-base items-center text-text-secondary font-semibold hover:scale-105 transition-all cursor-pointer"
+                            className="flex gap-2 text-base items-center text-text-secondary dark:text-dark-text-primary font-semibold hover:scale-105 transition-all cursor-pointer"
                             >
                                 <BsArrowLeft size={25} className="transition-all" />
                                 <span>Volver</span>
@@ -226,14 +224,14 @@ function NewSetPage() {
                     </h2>
                 </div>
 
-                <div className="w-full min-h-[380px] bg-white py-8 px-5 lg:px-10 flex flex-col gap-5 rounded-xl shadow-sm shadow-gray-600/20">
-                    <h3 className="font-medium text-dark text-lg font-sans">Detalles del conjunto</h3>
+                <div className="w-full min-h-[380px] bg-white dark:bg-dark-card py-8 px-5 lg:px-10 flex flex-col gap-5 rounded-xl shadow-sm shadow-gray-600/20">
+                    <h3 className="font-medium text-black dark:text-dark-text-primary text-lg font-sans">Detalles del conjunto</h3>
 
                     <form onSubmit={(e) => e.preventDefault()} className="w-full flex flex-col gap-10">
                         <div className="flex flex-col gap-1">
-                            <label className="text-sm font-medium text-black" htmlFor="set-name">Nombre del conjunto</label>
+                            <label className="text-sm font-medium text-black dark:text-dark-text-primary" htmlFor="set-name">Nombre del conjunto</label>
                             <input 
-                                className={`border-2 rounded-lg min-h-12 pl-3 text-sm outline-none focus:border-brand-200 transition-colors ${ error ? "border-red-500" : "border-gray-100" }`} 
+                                className={`border-2 rounded-lg min-h-12 pl-3 text-sm outline-none dark:text-dark-text-primary focus:border-brand-200 transition-colors dark:placeholder:text-dark-text-secondary ${ error ? "border-red-500" : "border-gray-100 dark:border-dark-accent" }`} 
                                 type="text" 
                                 id="set-name" 
                                 placeholder="Ej. Números Binarios" 
@@ -244,9 +242,9 @@ function NewSetPage() {
                                 />
                         </div>
                         <div className="flex flex-col gap-1">
-                            <label className="text-sm font-medium text-black" htmlFor="set-description">Descripción</label>
+                            <label className="text-sm font-medium text-black dark:text-dark-text-primary" htmlFor="set-description">Descripción</label>
                             <textarea 
-                                className={`resize-none border-2 border-gray-100 rounded-lg pl-3 pt-3 text-sm outline-none focus:border-brand-200 transition-colors ${ error ? "border-red-500" : "border-gray-100" }`}
+                                className={`resize-none border-2 border-gray-100 rounded-lg pl-3 pt-3 text-sm outline-none dark:text-dark-text-primary focus:border-brand-200 transition-colors dark:placeholder:text-dark-text-secondary ${ error ? "border-red-500" : "border-gray-100 dark:border-dark-accent" }`}
                                 id="set-description" 
                                 rows={5} 
                                 placeholder="Breve decripción del set..."
@@ -259,22 +257,22 @@ function NewSetPage() {
                     </form>
                 </div>
 
-                <div className="w-full bg-white px-5 lg:px-10 py-8 flex flex-col gap-5 rounded-xl shadow-sm shadow-gray-600/20">
+                <div className="w-full bg-white dark:bg-dark-card px-5 lg:px-10 py-8 flex flex-col gap-5 rounded-xl shadow-sm shadow-gray-600/20">
                     <div className="flex justify-between items-center">
-                        <p className="font-medium text-lg">Tarjetas <span>({ cards.length })</span></p>
+                        <p className="font-medium text-lg dark:text-dark-text-primary">Tarjetas <span>({ cards.length })</span></p>
                         <AddButton onClick={() => setIsCreatingCard(true) } text="Agregar tarjeta" variant="card" />
                     </div>
 
-                    <div className={`w-full px-2 rounded-lg bg-brand-50 ${ isCreatingCard || isEditingCard ? "flex" : "hidden" }`}>
+                    <div className={`w-full px-2 rounded-lg bg-brand-50 dark:bg-dark-accent ${ isCreatingCard || isEditingCard ? "flex" : "hidden" }`}>
                         <form onSubmit={(e) => e.preventDefault()} className="w-full flex flex-col p-4 gap-4">
-                            <h2 className="text-lg font-medium">Nueva tarjeta</h2>
+                            <h2 className="text-lg text-black font-medium dark:text-dark-text-primary">Nueva tarjeta</h2>
 
                             <div className="flex flex-col gap-10">
                                 <div className="flex flex-col md:flex-row gap-5">
                                     <div className="w-full flex flex-col gap-2">
-                                        <label className="text-sm text-medium text-text-secondary" htmlFor="front-card">Frente</label>
+                                        <label className="text-sm text-medium text-text-secondary dark:text-dark-text-primary" htmlFor="front-card">Frente</label>
                                         <textarea 
-                                            className={`p-4 border rounded-md placeholder:text-sm outline-none bg-white resize-none focus:border-red-200 transition-all text-sm ${ cardError ? "border-red-500" : "border-gray-300" }`}
+                                            className={`p-4 border rounded-md placeholder:text-sm outline-none bg-white dark:bg-dark-accent dark:text-dark-text-secondary resize-none focus:border-red-200 dark:focus:border-brand-500 transition-all text-sm ${ cardError ? "border-red-500" : "border-gray-300 dark:border-gray-700" }`}
                                             placeholder="Pregunta o término" 
                                             rows={5} 
                                             id="front-card"
@@ -287,8 +285,8 @@ function NewSetPage() {
                                     </div>
 
                                     <div className="w-full flex flex-col gap-2">
-                                        <label className="text-sm text-medium text-text-secondary" htmlFor="back-card">Reverso</label>
-                                        <textarea className={`p-4 border rounded-md placeholder:text-sm outline-none bg-white resize-none focus:border-red-200 transition-all text-sm ${ cardError ? "border-red-500" : "border-gray-300" }`}
+                                        <label className="text-sm text-medium text-text-secondary dark:text-dark-text-primary" htmlFor="back-card">Reverso</label>
+                                        <textarea className={`p-4 border rounded-md placeholder:text-sm outline-none bg-white dark:bg-dark-accent dark:text-dark-text-secondary resize-none focus:border-red-200 dark:focus:border-brand-500 transition-all text-sm ${ cardError ? "border-red-500" : "border-gray-300 dark:border-gray-700" }`}
                                             placeholder="Respuesta o definición" 
                                             rows={5} 
                                             id="back-card"
@@ -310,7 +308,7 @@ function NewSetPage() {
                                     </button>
                                     
                                     <button 
-                                        className="text-sm font-bold justify-center gap-3 bg-red-400 py-3 px-4 rounded-xl text-background-light cursor-pointer hover:scale-105 active:scale-100 active:opacity-70 transition-all"
+                                        className="text-sm font-bold justify-center gap-3 bg-red-400 dark:bg-red-500 py-3 px-4 rounded-xl text-background-light cursor-pointer hover:scale-105 active:scale-100 active:opacity-70 transition-all"
                                         type="button"
                                         onClick={ () => resetCardStates() }
                                         >
@@ -330,7 +328,7 @@ function NewSetPage() {
                         {
                             cards.map(card => {
                                 return (
-                                    <CardPreview onEdit={ () => editCard(card.id) } onDelete={ () => deleteCard(card.id) } key={ card.id } title={ card.title } text={ card.text } />
+                                    <CardPreview onEdit={ () => editCard(card.id) } onDelete={ () => handleDeleteCard(card.id) } key={ card.id } title={ card.title } text={ card.text } />
                                 )
                             })
                         }

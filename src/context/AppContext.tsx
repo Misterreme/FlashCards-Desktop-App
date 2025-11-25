@@ -41,6 +41,10 @@ interface AppState {
     setIsDeleteModalOpen: (v: boolean) => void;
     handleDeleteSet: (v: string) => void;
     deleteSet: (v: string) => void;
+    toDeleteCardId: string;
+    setToDeleteCardId: (v: string) => void;
+    handleDeleteCard: (v: string) => void;
+    deleteCard: (v: string) => void;
 }
 
 const AppContext = createContext<AppState | null>(null);
@@ -56,11 +60,17 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const [ studyngSetId, setStudyngSetId ] = useState("");
     const [ cardError, setCardError ] = useState("");
     const [ toDelteSetId, setToDeleteSetId ] = useState("");
+    const [ toDeleteCardId, setToDeleteCardId ] = useState("");
     const [ isDeleteModalOpen, setIsDeleteModalOpen ] = useState(false);
 
     function handleDeleteSet(id: string) {
         setIsDeleteModalOpen(true);
         setToDeleteSetId(id);
+    }
+
+    function handleDeleteCard(id: string) {
+        setIsDeleteModalOpen(true);
+        setToDeleteCardId(id);
     }
 
     function deleteSet(id: string) {
@@ -72,8 +82,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         })
     }
 
+    function deleteCard(id: string) {
+        setCards(prev => {
+            const filteredCards = prev.filter(card => card.id !== id);
+            return filteredCards;
+        })
+    }
+
     return (
-        <AppContext.Provider value={{isCreatingSet, setIsCreatingSet, isCreatingCard, setIsCreatingCard, sets, setSets, cards, setCards, error, setError, isEditingSet, setIsEditingSet, isEditingCard, setIsEditingCard, setIsStudyngSet, isStudyngSet, studyngSetId, setStudyngSetId, cardError, setCardError,  setToDeleteSetId, toDelteSetId, isDeleteModalOpen, setIsDeleteModalOpen, handleDeleteSet, deleteSet}}>
+        <AppContext.Provider value={{isCreatingSet, setIsCreatingSet, isCreatingCard, setIsCreatingCard, sets, setSets, cards, setCards, error, setError, isEditingSet, setIsEditingSet, isEditingCard, setIsEditingCard, setIsStudyngSet, isStudyngSet, studyngSetId, setStudyngSetId, cardError, setCardError,  setToDeleteSetId, toDelteSetId, isDeleteModalOpen, setIsDeleteModalOpen, handleDeleteSet, deleteSet, toDeleteCardId, setToDeleteCardId, handleDeleteCard, deleteCard }}>
             { children }
         </AppContext.Provider>
     )

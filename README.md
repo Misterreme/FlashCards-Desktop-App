@@ -5,6 +5,11 @@ Funciona como una app de escritorio usando **Electron**, y guarda los datos en u
 
 ---
 
+## 📘 Changelog
+Consulta los cambios recientes aquí: [CHANGELOG.md](CHANGELOG.md)
+
+--- 
+
 ## 🚀 Características
 
 - Crear sets de estudio con título, descripción y tarjetas.

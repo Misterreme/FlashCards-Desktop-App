@@ -9,7 +9,7 @@ import DeleteMessage from "../components/notifications/DeleteMessage";
 function HomePage() {
 
     const navigate = useNavigate();
-    const { setIsCreatingSet, sets, setSets, setIsEditingSet, setIsStudyngSet, setStudyngSetId, handleDeleteSet} = useAppContext();
+    const { setIsCreatingSet, sets, setSets, setIsEditingSet, setIsStudyngSet, setStudyngSetId, handleDeleteSet } = useAppContext();
 
     function handleCreateSet() {
         navigate("/sets/new");
@@ -29,19 +29,18 @@ function HomePage() {
 
     useEffect(() => {
         window.CRUD.loadJSON().then(data => {
-            console.log(data)
             setSets(data);
         })
     }, [])
 
     return (
-        <section id="main-section" className="w-full min-h-full bg-background-light pt-[10dvh] pb-[5dvh] realtive">
+        <section id="main-section" className="w-full min-h-full bg-background-light dark:bg-dark-background pt-[10dvh] pb-[5dvh] realtive">
             <DeleteMessage text="¿Estas seguro que quieres eliminar este set? Esta acción no pude deshacerse." />
             <div className="w-full h-full flex flex-col items-center gap-10">
                 <div className="flex flex-col items-center gap-15">
                     <div className="flex flex-col items-center justify-center gap-5 px-3">
                         <h1 className="text-center text-4xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-brand-300 via-brand-400 to-brand-700 animate-text">FlashCards</h1>
-                        <p className="text-center text-wrap text-lg text-text-primary md:text-xl md:w-1/2">Organiza tus estudios con tarjetas interactivas. Crea conjuntos, estudia y mejora tu memoria.</p>
+                        <p className="text-center text-wrap text-lg text-text-primary dark:text-dark-text-primary md:text-xl md:w-1/2">Organiza tus estudios con tarjetas interactivas. Crea conjuntos, estudia y mejora tu memoria.</p>
                     </div>
                     <div>
                         <AddButton onClick={ handleCreateSet } text="Crear nuevo Set" />
@@ -50,9 +49,9 @@ function HomePage() {
 
                 <div className="w-full flex flex-col gap-8">
                     <div className="w-full flex flex-col items-center justify-center gap-10">
-                        <p className="text-2xl font-bold text-text-secondary">Mis conjuntos (<span>{ sets.length }</span>)</p>
+                        <p className="text-2xl font-bold text-text-secondary dark:text-dark-text-secondary">Mis conjuntos (<span>{ sets.length }</span>)</p>
 
-                        <div className="w-full px-5 md:px-10 lg:px-15 h-full grid grid-cols-1 place-items-center place-content-center gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                        <div className="w-full px-5 md:px-10 lg:px-15 h-full grid grid-cols-1 place-items-center place-content-center gap-5 sm:grid-cols-2 lg:grid-cols-3">
                             {
                                 sets.map(set => <SetCard 
                                     key={ set.id }
@@ -72,10 +71,10 @@ function HomePage() {
 
                     <div className={`w-full px-5 flex-col justify-center items-center ${ sets.length ? "hidden" : "flex" } `}>
                         <div className="flex flex-col gap-5 items-center justify-center">
-                            <FiBookOpen size={80} color="gray" />
-                            <h2 className="text-xl font-semibold text-wrap text-center text-text-secondary">No tienes sets todavia</h2>
+                            <FiBookOpen size={80} className="text-dark dark:text-dark-text-primary" />
+                            <h2 className="text-xl font-semibold text-wrap text-center text-text-secondary dark:text-dark-text-secondary">No tienes sets todavia</h2>
                         </div>
-                        <p className="text-lg font-semibold text-wrap text-center text-text-muted">¡Comienza creando tu primer conjunto de flashcards!</p>
+                        <p className="text-lg font-semibold text-wrap text-center text-text-muted dark:text-dark-text-muted">¡Comienza creando tu primer conjunto de flashcards!</p>
                     </div>
                 </div>
             </div>

@@ -125,6 +125,7 @@
 }
 
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
   --font-sans: 'Poppins', sans-serif;
@@ -134,7 +135,7 @@
   /* Tipografía base */
   --font-primary: 'Inter', ui-sans-serif, system-ui;
 
-  /* 🎨 Paleta principal */
+  /* 🎨 Paleta principal (Light) */
   --color-background-light: #f9fafb;
   --color-background-card: #ffffff;
   --color-background-accent: #f0f7ff;
@@ -143,7 +144,7 @@
   --color-text-secondary: #4b5563;
   --color-text-muted: #9ca3af;
 
-  /* 🔵 Azules (color de marca) */
+  /* 🔵 Azules (color de marca - Light) */
   --color-brand-50:  #f0f7ff;
   --color-brand-100: #d9ebff;
   --color-brand-200: #b3d6ff;
@@ -155,12 +156,12 @@
   --color-brand-800: #004080;
   --color-brand-900: #00264d;
 
-  /* 🟢 Verde (éxito, confirmar) */
+  /* 🟢 Verde (éxito, confirmar - Light) */
   --color-success-400: #4ade80;
   --color-success-500: #22c55e;
   --color-success-600: #16a34a;
 
-  /* 🔴 Rojo (error, eliminar) */
+  /* 🔴 Rojo (error, eliminar - Light) */
   --color-danger-400: #f87171;
   --color-danger-500: #ef4444;
   --color-danger-600: #dc2626;
@@ -174,6 +175,45 @@
 
   --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.1);
   --shadow-glow: 0 0 10px rgba(26, 140, 255, 0.4);
+
+
+  /* 🌚🌚🌚 MODO OSCURO (Dark Mode) — añadido abajo */
+
+  /* 🎨 Paleta principal (Dark) */
+  --color-dark-background: #0d1117;
+  --color-dark-card: #161b22;
+  --color-dark-accent: #1f2937;
+
+  /* 📝 Texto (Dark) */
+  --color-dark-text-primary: #f3f4f6;
+  --color-dark-text-secondary: #d1d5db;
+  --color-dark-text-muted: #9ca3af;
+
+  /* 🔵 Azules (color de marca - Dark) */
+  --color-dark-brand-50:  #0e1726;
+  --color-dark-brand-100: #1a2333;
+  --color-dark-brand-200: #1e3a5a;
+  --color-dark-brand-300: #2c4f78;
+  --color-dark-brand-400: #3a67a3;
+  --color-dark-brand-500: #4d88ff;
+  --color-dark-brand-600: #3c6bd9;
+  --color-dark-brand-700: #325ab3;
+  --color-dark-brand-800: #274080;
+  --color-dark-brand-900: #1b2a4d;
+
+  /* 🟢 Verde (Dark) */
+  --color-dark-success-400: #3ddc7c;
+  --color-dark-success-500: #1fb968;
+  --color-dark-success-600: #149451;
+
+  /* 🔴 Rojo (Dark) */
+  --color-dark-danger-400: #f36d6d;
+  --color-dark-danger-500: #e54545;
+  --color-dark-danger-600: #c62828;
+
+  /* ✨ Sombras (Dark) */
+  --shadow-dark-card: 0 4px 14px rgba(0, 0, 0, 0.4);
+  --shadow-dark-glow: 0 0 10px rgba(77, 136, 255, 0.5);
 }
 
 @keyframes animate-text {
@@ -187,11 +227,51 @@
   animation: animate-text 5s ease infinite;
 }
 
+@keyframes animate-bg {
+  0% { background-color: oklch(87.2% 0.01 258.338) }
+  50% { background-color: oklch(70.4% 0.04 256.788) }
+  100% { background-color: oklch(87.2% 0.01 258.338) }
+}
+
+.animate-bg {
+  animation: animate-bg 5s ease infinite
+}
+
+@keyframes spinFade {
+  0% {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.icon-animate {
+  animation: spinFade 0.35s ease;
+}
+
+::-webkit-scrollbar {
+  background: #0d1117;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+  width: 1px;
+  border-radius: 8px
+}
+
 #header-bar {
   -webkit-app-region: drag;
 }
 
 #window-icons > div {
+  -webkit-app-region: no-drag;
+}
+
+#theme-button {
   -webkit-app-region: no-drag;
 }
 
